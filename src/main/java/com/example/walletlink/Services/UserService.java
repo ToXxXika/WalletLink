@@ -8,4 +8,5 @@ import java.security.Principal;
 public interface UserService {
   ResponseEntity<String> register(User u );
   Principal login(Principal p);
+  ResponseEntity<String> transferMoney(String cin , float cash);
 }
