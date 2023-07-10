@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Principal login(Principal p) {
-           return p ;
+    public String login(Principal p) {
+           return p.getName() ;
     }
 
     @Override

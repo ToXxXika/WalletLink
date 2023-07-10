@@ -117,6 +117,7 @@ public class WalletSeviceImpl implements WalletService {
                 }
             }
         }
+        //TODO : this picture needs to be fixed
         BufferedImage logo= ImageIO.read(new File("C:\\Users\\mabro\\IdeaProjects\\WalletLink\\src\\main\\resources\\static\\uib.jpg"));
         int logoSize = matrixWidth / 4 ;
         int posX = (matrixWidth - logoSize)/2;
