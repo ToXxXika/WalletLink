@@ -27,7 +27,7 @@ public class WalletController {
     }
     @GetMapping("/qr")
     public void qr() throws IOException, WriterException {
-        walletSevice.QR_generator();
+        walletSevice.QR_generator("X", 0.0);
     }
 
 }

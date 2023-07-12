@@ -2,6 +2,8 @@ package com.example.walletlink.Models;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
 public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,10 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "user_account", referencedColumnName = "cin" ,insertable = false,updatable = false)
     private User userByUserAccount;
+    @OneToMany(mappedBy = "accountBySender")
+    private Collection<Transaction> transactionsByRib;
+    @OneToMany(mappedBy = "accountByReceiver")
+    private Collection<Transaction> transactionsByRib_0;
 
     public String getRib() {
         return rib;
@@ -70,5 +76,21 @@ public class Account {
 
     public void setUserByUserAccount(User userByUserAccount) {
         this.userByUserAccount = userByUserAccount;
+    }
+
+    public Collection<Transaction> getTransactionsByRib() {
+        return transactionsByRib;
+    }
+
+    public void setTransactionsByRib(Collection<Transaction> transactionsByRib) {
+        this.transactionsByRib = transactionsByRib;
+    }
+
+    public Collection<Transaction> getTransactionsByRib_0() {
+        return transactionsByRib_0;
+    }
+
+    public void setTransactionsByRib_0(Collection<Transaction> transactionsByRib_0) {
+        this.transactionsByRib_0 = transactionsByRib_0;
     }
 }

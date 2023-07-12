@@ -8,8 +8,8 @@ import java.io.IOException;
 public interface WalletService {
 
      String  ReferenceGenerator();
-    ResponseEntity<String> fundWallet(String cin, float cash);
+    ResponseEntity<String> fundWallet(String cin, float cash, String reference);
     ResponseEntity<String> CashWithdraw(float cash);
-    void QR_generator() throws IOException, WriterException;
+    void QR_generator(String x ,double y) throws IOException, WriterException;
 
 }
