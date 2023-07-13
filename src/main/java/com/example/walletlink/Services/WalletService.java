@@ -12,4 +12,6 @@ public interface WalletService {
     ResponseEntity<String> CashWithdraw(float cash);
     void QR_generator(String x ,double y) throws IOException, WriterException;
 
+    ResponseEntity<String> peerToPeer(String sender, String receiver, float amount);
+
 }
