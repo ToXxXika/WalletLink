@@ -1,5 +1,6 @@
 package com.example.walletlink.Services;
 
+import com.example.walletlink.Models.Wallet;
 import com.google.zxing.WriterException;
 import org.springframework.http.ResponseEntity;
 
@@ -13,5 +14,6 @@ public interface WalletService {
     void QR_generator(String x ,double y) throws IOException, WriterException;
 
     ResponseEntity<String> peerToPeer(String sender, String receiver, float amount);
+    ResponseEntity<Wallet> getWalletDetails (String cin);
 
 }

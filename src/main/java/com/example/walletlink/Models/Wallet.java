@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class Wallet {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ref_wallet", nullable = false, length = 255)
     private String refWallet;

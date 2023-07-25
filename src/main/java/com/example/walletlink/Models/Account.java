@@ -1,12 +1,13 @@
 package com.example.walletlink.Models;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.Collection;
 
 @Entity
+@NoArgsConstructor
 public class Account {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Rib", nullable = false, length = 40)
     private String rib;
@@ -23,6 +24,12 @@ public class Account {
     private Collection<Transaction> transactionsByRib;
     @OneToMany(mappedBy = "accountByReceiver")
     private Collection<Transaction> transactionsByRib_0;
+
+    public Account(String rib, String userAccount, Double balance) {
+        this.rib = rib;
+        this.userAccount = userAccount;
+        this.balance = balance;
+    }
 
     public String getRib() {
         return rib;

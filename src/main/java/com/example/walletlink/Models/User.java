@@ -2,19 +2,30 @@ package com.example.walletlink.Models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
+
 public class User {
+    public User(String nom, String prenom, String cin, String telephone, String email, String mdp) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cin = cin;
+        this.telephone = telephone;
+        this.email = email;
+        this.mdp = mdp;
+    }
+
     @Basic
     @Column(name = "nom", nullable = true, length = 255)
     private String nom;
     @Basic
     @Column(name = "prenom", nullable = true, length = 255)
     private String prenom;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "cin", nullable = false, length = 8)
     private String cin;

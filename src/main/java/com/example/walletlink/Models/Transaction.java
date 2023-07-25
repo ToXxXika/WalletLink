@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Setter
 @Getter
-
 public class Transaction {
     @Basic
     @Column(name = "sender")
@@ -21,7 +20,6 @@ public class Transaction {
     @Basic
     @Column(name = "amount")
     private double amount;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ref_trans")
     private String refTrans;

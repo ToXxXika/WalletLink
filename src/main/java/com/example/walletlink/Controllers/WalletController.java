@@ -5,10 +5,7 @@ import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -28,6 +25,14 @@ public class WalletController {
     @GetMapping("/qr")
     public void qr() throws IOException, WriterException {
         walletSevice.QR_generator("X", 0.0);
+    }
+    @PostMapping("/fw")
+    public ResponseEntity<String> fundwallet(@RequestParam(name = "cin")String cin, @RequestParam(name="cash")float cash,@RequestParam(name = "walletref") String walletRef){
+        return walletSevice.fundWallet(cin,cash,walletRef);
+    }
+    @PostMapping("/transfer")
+    public ResponseEntity<String> p2p(@RequestParam(name = "sender")String sender,@RequestParam(name = "receiver")String receiver,@RequestParam(name = "amount")float amount){
+        return walletSevice.peerToPeer(sender,receiver,amount);
     }
 
 }

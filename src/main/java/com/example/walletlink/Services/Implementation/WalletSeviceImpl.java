@@ -143,6 +143,16 @@ public class WalletSeviceImpl implements WalletService {
     }
 
     @Override
+    public ResponseEntity<Wallet> getWalletDetails(String cin) {
+        try{
+
+            return new ResponseEntity<>(walletRepository.findByUserWallet(cin),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
     public ResponseEntity<String> CashWithdraw(float cash) {
         return null;
     }
