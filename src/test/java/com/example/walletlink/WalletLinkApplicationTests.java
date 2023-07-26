@@ -26,7 +26,7 @@ class WalletLinkApplicationTests {
 
     @Test
     void contextLoads() {
-        User u = new User("Oussema", "Mabrouki", "07220650", "92652461", "mabrouki552@gmail.com", "123456");
+     /*   User u = new User("Oussema", "Mabrouki", "07220650", "92652461", "mabrouki552@gmail.com", "123456");
         User u2 = new User("Jawher", "Limem", "12345678", "90050177", "jawher@gmail.com", "123456");
         User u3 = new User("Globale","Globale","00000000","00000000","00000000","00000000");
         userService.register(u);
@@ -39,6 +39,8 @@ class WalletLinkApplicationTests {
         accountService.createAccount(a2);
         accountService.createAccount(global);
         walletSevice.fundWallet("07220650",100, Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet());
+       */
+        walletSevice.peerToPeer(Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet(),Objects.requireNonNull(walletSevice.getWalletDetails("12345678").getBody()).getRefWallet(),50);
 
     }
 

@@ -102,6 +102,7 @@ public class WalletSeviceImpl implements WalletService {
                 w.setBalance(w.getBalance() + cash);
                 transactionService.initTransaction(a.getRib(), "9861450092652461", cash);
                 walletRepository.save(w);
+                System.out.println("Wallet funded successfully");
                 return ResponseEntity.ok("Wallet funded successfully");
             } else {
                 return ResponseEntity.ok("Insufficient funds");
@@ -114,8 +115,6 @@ public class WalletSeviceImpl implements WalletService {
 
     @Override
     public ResponseEntity<String> peerToPeer(String sender, String receiver, float amount) {
-        // sender is the wallet reference of the sender
-        // receiver is the wallet reference of the receiver
         try {
             Wallet x = walletRepository.findById(sender).get();
             if (x.getBalance() > amount) {
@@ -123,21 +122,16 @@ public class WalletSeviceImpl implements WalletService {
                 Wallet y = walletRepository.findById(receiver).get();
                 y.setBalance(y.getBalance() + amount);
                 walletRepository.save(x);
-                //this needs to be changed with the receiver get wallet
-                //find the account of the sender
                 Account a = accountRepository.findByUserAccount(x.getUserWallet());
-                a.setBalance(a.getBalance() - amount);
                 transactionService.initTransaction(a.getRib(), "9861450092652461", amount);
-                accountRepository.save(a);
                 walletRepository.save(y);
                 return ResponseEntity.ok("Wallet Transaction done successfully");
-
-
             } else {
+                System.out.println("Insufficient funds");
                 return new ResponseEntity<>("Insufficient funds", HttpStatus.BAD_REQUEST);
             }
-
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>("Wallet Transaction Failed", HttpStatus.BAD_REQUEST);
         }
     }

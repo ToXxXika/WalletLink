@@ -13,6 +13,7 @@ import java.security.Principal;
 @RestController
 @CrossOrigin("*")  //TODO: change it to a specific port
 @RequestMapping("/user")
+
 public class UserController {
 
     @Autowired
