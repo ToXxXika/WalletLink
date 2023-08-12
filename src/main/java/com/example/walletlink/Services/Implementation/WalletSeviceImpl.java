@@ -123,6 +123,7 @@ public class WalletSeviceImpl implements WalletService {
                 y.setBalance(y.getBalance() + amount);
                 walletRepository.save(x);
                 Account a = accountRepository.findByUserAccount(x.getUserWallet());
+               //TODO : fix me 26/07/2023
                 transactionService.initTransaction(a.getRib(), "9861450092652461", amount);
                 walletRepository.save(y);
                 return ResponseEntity.ok("Wallet Transaction done successfully");

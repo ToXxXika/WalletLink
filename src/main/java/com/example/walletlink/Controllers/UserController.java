@@ -19,10 +19,7 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
 
-    @GetMapping("/welcome")
-    public ResponseEntity<String> welcome(){
-        return new ResponseEntity<>("Hello ", HttpStatus.OK);
-    }
+
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User u){
         return userService.register(u);

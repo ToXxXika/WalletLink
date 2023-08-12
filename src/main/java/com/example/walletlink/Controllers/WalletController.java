@@ -1,5 +1,6 @@
 package com.example.walletlink.Controllers;
 
+import com.example.walletlink.Models.Wallet;
 import com.example.walletlink.Services.Implementation.WalletSeviceImpl;
 import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class WalletController {
     @PostMapping("/transfer")
     public ResponseEntity<String> p2p(@RequestParam(name = "sender")String sender,@RequestParam(name = "receiver")String receiver,@RequestParam(name = "amount")float amount){
         return walletSevice.peerToPeer(sender,receiver,amount);
+    }
+    //gwd = get wallet details
+    @GetMapping("/gwd")
+    public ResponseEntity<Wallet> getwalletDetails(@RequestParam(name = "cin")String cin){
+        return  walletSevice.getWalletDetails(cin);
     }
 
 }
