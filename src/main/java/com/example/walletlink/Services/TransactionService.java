@@ -1,8 +1,9 @@
 package com.example.walletlink.Services;
 
-import org.springframework.http.ResponseEntity;
+import java.util.Map;
 
 public interface TransactionService {
-    ResponseEntity<String> initTransaction(String sender, String receiver, float amount);
+    Map<String,Object> initTransaction(String sender, String receiver, double amount);
+    Map<String,Object> getTransactions(String cin);
 
 }

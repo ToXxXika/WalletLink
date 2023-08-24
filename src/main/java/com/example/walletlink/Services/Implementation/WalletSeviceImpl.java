@@ -12,8 +12,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -90,12 +88,15 @@ public class WalletSeviceImpl implements WalletService {
     //TODO : complete this method 7/12/2023
     // we have 2 cases heree 1- the user is from UIB 2- the user is from another bank
     @Override
-    public ResponseEntity<String> fundWallet(String cin, float cash, String walletref) {
+    public Map<String,Object> fundWallet(String cin, float cash, String walletref) {
+        Map<String,Object> fw = new HashMap<>();
         try {
             Account a = accountRepository.findByUserAccount(cin);
             if (a == null) {
                 // Todo : here we need to implement external verification for the bank account and apply the same logic
-                return new ResponseEntity<>("Transaction Failed", HttpStatus.BAD_REQUEST);
+                fw.put("code",500);
+                fw.put("message","Account not found");
+                return fw;
             }
             Wallet w = walletRepository.findById(walletref).get();
             if (Objects.requireNonNull(a).getBalance() > cash) {
@@ -103,18 +104,28 @@ public class WalletSeviceImpl implements WalletService {
                 transactionService.initTransaction(a.getRib(), "9861450092652461", cash);
                 walletRepository.save(w);
                 System.out.println("Wallet funded successfully");
-                return ResponseEntity.ok("Wallet funded successfully");
+                fw.put("code",200);
+                fw.put("message","Wallet funded successfully");
+                return fw;
             } else {
-                return ResponseEntity.ok("Insufficient funds");
+                System.out.println("Insufficient funds");
+                fw.put("code",400);
+                fw.put("message","Insufficient funds");
+                return fw;
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Transaction Failed", HttpStatus.BAD_REQUEST);
+            System.out.println(e.getMessage());
+            fw.put("code",400);
+            fw.put("message","Transaction Failed");
+            return fw;
         }
 
     }
 
     @Override
-    public ResponseEntity<String> peerToPeer(String sender, String receiver, float amount) {
+    public Map<String,Object> peerToPeer(String sender, String receiver, double amount) {
+        Map<String,Object> z = new HashMap<>();
+
         try {
             Wallet x = walletRepository.findById(sender).get();
             if (x.getBalance() > amount) {
@@ -126,29 +137,61 @@ public class WalletSeviceImpl implements WalletService {
                //TODO : fix me 26/07/2023
                 transactionService.initTransaction(a.getRib(), "9861450092652461", amount);
                 walletRepository.save(y);
-                return ResponseEntity.ok("Wallet Transaction done successfully");
+                z.put("code",200);
+                z.put("message","Transaction completed successfully");
+                return z;
             } else {
                 System.out.println("Insufficient funds");
-                return new ResponseEntity<>("Insufficient funds", HttpStatus.BAD_REQUEST);
+                z.put("code",400);
+                z.put("message","Insufficient funds");
+                return z;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<>("Wallet Transaction Failed", HttpStatus.BAD_REQUEST);
+            z.put("code",400);
+            z.put("message","Transaction Failed");
+            return z;
+
         }
     }
 
     @Override
-    public ResponseEntity<Wallet> getWalletDetails(String cin) {
+    public Map<String,Object> getWalletDetails(String cin) {
+        Map<String,Object> x = new HashMap<>();
         try{
-
-            return new ResponseEntity<>(walletRepository.findByUserWallet(cin),HttpStatus.OK);
+            Wallet w = walletRepository.findByUserWallet(cin);
+           if(w!=null){
+               x.put("code",200);
+                x.put("message","Wallet found");
+                x.put("wallet",w);
+           }
         }catch (Exception e){
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            x.put("code",400);
+            x.put("message","Wallet not found");
         }
+        return x;
     }
 
     @Override
-    public ResponseEntity<String> CashWithdraw(float cash) {
+    public Map<String, Object> getAccountDetails(String cin) {
+        Map<String,Object> x = new HashMap<>();
+        x.put("code",400);
+        try {
+            Account a = accountRepository.findByUserAccount(cin);
+            if(a!=null){
+                x.put("code",200);
+                x.put("message","Account found");
+                x.put("account",a);
+            }
+
+        }catch (Exception e){
+            x.put("message","Account not found");
+        }
+        return x;
+    }
+
+    @Override
+    public Map<String,Object> CashWithdraw(float cash) {
         return null;
     }
 

@@ -13,11 +13,11 @@ public interface AccountRepository  extends JpaRepository<Account, Long> {
     @Transactional
     @Modifying
     @Query("update Account a set a.balance = a.balance - ?2 where a.rib = ?1")
-    int SubstractFromBalance(String rib, float cash);
+    int SubstractFromBalance(String rib, double cash);
     @Transactional
     @Modifying
     @Query("update Account a set a.balance = a.balance + ?2 where a.rib = ?1")
-    int AddToBalance(String rib, float cash);
+    int AddToBalance(String rib, double cash);
     @Query("select a from Account  a where a.userAccount = ?1")
     Account findByUserAccount(String cin);
 

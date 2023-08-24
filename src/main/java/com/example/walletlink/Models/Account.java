@@ -1,5 +1,6 @@
 package com.example.walletlink.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -19,9 +20,12 @@ public class Account {
     private Double balance;
     @OneToOne
     @JoinColumn(name = "user_account", referencedColumnName = "cin" ,insertable = false,updatable = false)
+    @JsonBackReference
     private User userByUserAccount;
+    @JsonBackReference
     @OneToMany(mappedBy = "accountBySender")
     private Collection<Transaction> transactionsByRib;
+    @JsonBackReference
     @OneToMany(mappedBy = "accountByReceiver")
     private Collection<Transaction> transactionsByRib_0;
 

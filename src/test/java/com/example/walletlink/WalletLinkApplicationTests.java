@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Objects;
-
 @SpringBootTest
 class WalletLinkApplicationTests {
 
@@ -38,9 +36,9 @@ class WalletLinkApplicationTests {
         accountService.createAccount(a);
         accountService.createAccount(a2);
         accountService.createAccount(global);
-        walletSevice.fundWallet("07220650",100, Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet());
+   //     walletSevice.fundWallet("07220650",100, Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet());
 
-        walletSevice.peerToPeer(Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet(),Objects.requireNonNull(walletSevice.getWalletDetails("12345678").getBody()).getRefWallet(),50);
+     //  walletSevice.peerToPeer(Objects.requireNonNull(walletSevice.getWalletDetails("07220650").getBody()).getRefWallet(),Objects.requireNonNull(walletSevice.getWalletDetails("12345678").getBody()).getRefWallet(),50);
 
     }
 

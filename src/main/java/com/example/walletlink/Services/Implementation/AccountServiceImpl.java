@@ -4,9 +4,10 @@ import com.example.walletlink.Models.Account;
 import com.example.walletlink.Repositories.AccountRepository;
 import com.example.walletlink.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -26,13 +27,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseEntity<String> createAccount(Account account) {
+    public Map<String, Object> createAccount(Account account) {
+        Map<String,Object> x = new HashMap<>();
         try {
             accountRepository.save(account);
-            return new ResponseEntity<>("Account Created", org.springframework.http.HttpStatus.OK);
+            x.put("account",account);
+            x.put("code",200);
+            return x;
         } catch (Exception E) {
             System.out.println(E.getMessage());
-            return new ResponseEntity<>("Account Not Created", org.springframework.http.HttpStatus.BAD_REQUEST);
+            x.put("code",500);
+            x.put("message",E.getMessage());
+            return x;
 
         }
     }

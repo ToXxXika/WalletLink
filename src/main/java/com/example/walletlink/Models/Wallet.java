@@ -1,5 +1,6 @@
 package com.example.walletlink.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class Wallet {
     @Column(name = "user_wallet", nullable = true, length = 8)
     private String userWallet;
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "user_wallet", referencedColumnName = "cin",updatable = false,insertable = false)
     private User userByUserWallet;
 

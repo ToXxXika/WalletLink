@@ -1,10 +1,11 @@
 package com.example.walletlink.Services;
 
 import com.example.walletlink.Models.Account;
-import org.springframework.http.ResponseEntity;
+
+import java.util.Map;
 
 public interface AccountService {
     String generateRib();
-    ResponseEntity<String> createAccount(Account account);
+    Map<String,Object> createAccount(Account account);
 
 }

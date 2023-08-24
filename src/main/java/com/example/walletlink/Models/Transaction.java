@@ -1,5 +1,6 @@
 package com.example.walletlink.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +27,11 @@ public class Transaction {
     @Basic
     @Column(name = "date_trans")
     private Timestamp dateTrans;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "sender", referencedColumnName = "Rib", nullable = false,insertable = false,updatable = false)
     private Account accountBySender;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "receiver", referencedColumnName = "Rib", nullable = false,insertable = false,updatable = false)
     private Account accountByReceiver;

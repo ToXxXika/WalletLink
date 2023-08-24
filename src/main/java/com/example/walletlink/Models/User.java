@@ -1,5 +1,6 @@
 package com.example.walletlink.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,11 @@ public class User {
         this.telephone = telephone;
         this.email = email;
         this.mdp = mdp;
+    }
+    public User(String mail,String password,String cin){
+        this.email=mail;
+        this.mdp=password;
+        this.cin=cin;
     }
 
     @Basic
@@ -38,8 +44,10 @@ public class User {
     @Basic
     @Column(name = "mdp", nullable = true, length = 255)
     private String mdp;
+    @JsonManagedReference
     @OneToOne(mappedBy = "userByUserAccount")
     private Account accountsByCin;
+    @JsonManagedReference
     @OneToOne(mappedBy = "userByUserWallet")
     private Wallet walletsByCin;
 

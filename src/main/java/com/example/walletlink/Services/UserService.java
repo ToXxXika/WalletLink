@@ -2,13 +2,13 @@ package com.example.walletlink.Services;
 
 import com.example.walletlink.Models.Account;
 import com.example.walletlink.Models.User;
-import org.springframework.http.ResponseEntity;
 
-import java.security.Principal;
+import java.util.Map;
 
 public interface UserService {
-  ResponseEntity<String> register(User u );
-  String login(Principal p);
-  ResponseEntity<String> transferMoney(String cin , float cash);
-  ResponseEntity<String> addAccount(Account a);
+  Map<String,Object> register(User u );
+  Map<String, Object> login(String mail, String password);
+  Map<String,Object> transferMoney(String cin , float cash);
+  Map<String,Object> addAccount(Account a);
+  Map<String,Object> changePassword(String cin , String oldPassword , String newPassword);
 }
