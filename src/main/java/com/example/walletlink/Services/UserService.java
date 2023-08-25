@@ -11,4 +11,5 @@ public interface UserService {
   Map<String,Object> transferMoney(String cin , float cash);
   Map<String,Object> addAccount(Account a);
   Map<String,Object> changePassword(String cin , String oldPassword , String newPassword);
+  Map<String,Object> EditUser(String cin , String mail , String telephone);
 }

@@ -110,4 +110,22 @@ public class UserServiceImpl implements UserService {
         }
         return x;
     }
+
+    @Override
+    public Map<String, Object> EditUser(String cin, String mail, String telephone) {
+        Map<String, Object> x = new HashMap<>();
+        x.put("code", 400);
+        try {
+            User u = userRepository.findById(cin).get();
+            u.setEmail(mail);
+            u.setTelephone(telephone);
+            userRepository.save(u);
+            x.put("code", 200);
+            x.put("message", "User edited successfully");
+            x.put("user", u);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return x;
+    }
 }

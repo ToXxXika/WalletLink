@@ -39,4 +39,8 @@ public class UserController {
     public Map<String,Object> changePassword(@RequestParam(name = "cin")String cin , @RequestParam(name = "oldPassword")String oldPassword , @RequestParam(name = "newPassword")String newPassword){
         return userService.changePassword(cin, oldPassword, newPassword);
     }
+    @PostMapping("/edit")
+    public Map<String,Object> editUser(@RequestParam(name = "cin")String cin , @RequestParam(name = "mail")String mail , @RequestParam(name = "telephone")String telephone){
+        return userService.EditUser(cin, mail, telephone);
+    }
 }
