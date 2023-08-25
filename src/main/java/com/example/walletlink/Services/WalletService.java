@@ -8,7 +8,7 @@ import java.util.Map;
 public interface WalletService {
 
      String  ReferenceGenerator();
-    Map<String,Object> fundWallet(String cin, float cash, String reference);
+    Map<String,Object> fundWallet(String cin, double cash, String reference);
     Map<String,Object> CashWithdraw(float cash);
     void QR_generator(String x ,double y) throws IOException, WriterException;
 

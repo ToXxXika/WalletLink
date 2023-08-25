@@ -25,6 +25,10 @@ public class User {
         this.mdp=password;
         this.cin=cin;
     }
+    public User(String email,String password){
+        this.email=email;
+        this.mdp=password;
+    }
 
     @Basic
     @Column(name = "nom", nullable = true, length = 255)

@@ -30,8 +30,9 @@ public class WalletController {
     }
 
     @PostMapping("/fw")
-    public Map<String, Object> fundwallet(@RequestParam(name = "cin") String cin, @RequestParam(name = "cash") float cash, @RequestParam(name = "walletref") String walletRef) {
-        return walletSevice.fundWallet(cin, cash, walletRef);
+    public Map<String, Object> fundwallet(@RequestParam(name = "cin") String cin, @RequestParam(name = "cash") String cash, @RequestParam(name = "walletref") String walletRef) {
+       double cash1 = Double.parseDouble(cash);
+        return walletSevice.fundWallet(cin, cash1, walletRef);
     }
 
     @PostMapping("/transfer")

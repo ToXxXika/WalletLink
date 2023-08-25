@@ -88,7 +88,7 @@ public class WalletSeviceImpl implements WalletService {
     //TODO : complete this method 7/12/2023
     // we have 2 cases heree 1- the user is from UIB 2- the user is from another bank
     @Override
-    public Map<String,Object> fundWallet(String cin, float cash, String walletref) {
+    public Map<String,Object> fundWallet(String cin, double cash, String walletref) {
         Map<String,Object> fw = new HashMap<>();
         try {
             Account a = accountRepository.findByUserAccount(cin);
